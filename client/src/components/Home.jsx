@@ -10,27 +10,33 @@ function Home() {
   const navigate = useNavigate(); // for routing to results
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!review.trim()) {
-      setError("Please enter a review.");
-      return;
-    }
-    try {
-      // Send review to backend /analyze endpoint
-      //   const response = await axios.post("http://localhost:3001/analyze", {
-      //     review,
-      //   });
+  e.preventDefault();
 
-      const response = await axios.post("/analyze", { review });
+  if (!review.trim()) {
+    setError("Please enter a review.");
+    return;
+  }
 
-      const { sentiment, explanation } = response.data;
-      // Pass the data via state to Results page
-      navigate("/results", { state: { sentiment, explanation, review } });
-    } catch (err) {
-      console.error(err);
-      setError("Error analyzing sentiment.");
-    }
-  };
+  try {
+    // Log to confirm correct URL is being used
+    console.log("API URL:", import.meta.env.VITE_API_URL);
+
+    // Send POST request to backend
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/analyze`,
+      { review }
+    );
+
+    const { sentiment, explanation } = response.data;
+
+    // Navigate to results page with sentiment details
+    navigate("/results", { state: { sentiment, explanation, review } });
+  } catch (err) {
+    console.error(err);
+    setError("Error analyzing sentiment.");
+  }
+};
+
 
   return (
     <div className="container">
