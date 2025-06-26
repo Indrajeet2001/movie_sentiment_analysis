@@ -1,4 +1,3 @@
-// client/src/components/Home.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -18,9 +17,6 @@ function Home() {
   }
 
   try {
-    // Log to confirm correct URL is being used
-    console.log("API URL:", import.meta.env.VITE_API_URL);
-
     // Send POST request to backend
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/analyze`,
