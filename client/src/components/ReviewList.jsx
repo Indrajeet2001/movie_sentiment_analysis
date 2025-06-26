@@ -5,11 +5,12 @@ const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/reviews")
-      .then((res) => setReviews(res.data))
-      .catch((err) => console.error("Error fetching reviews:", err));
-  }, []);
+  axios
+    .get(`${import.meta.env.VITE_API_URL}/reviews`)
+    .then((res) => setReviews(res.data))
+    .catch((err) => console.error("Error fetching reviews:", err));
+}, []);
+
 
   return (
     <div className="max-w-3xl mx-auto mt-8">
