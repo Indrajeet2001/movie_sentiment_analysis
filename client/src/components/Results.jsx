@@ -1,4 +1,3 @@
-// client/src/components/Results.js
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
 
